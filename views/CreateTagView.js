@@ -15,22 +15,6 @@ const CreateTagView = ({navigation,}) => {
 
     const [id,setId] = useState(0);
     const [name,setName] = useState('');
-    
-    const addItemToList = async () => {
-        try{
-            let user = {
-                id : id,
-                name : name
-            }
-          await AsyncStorage.setItem('Id',JSON.stringify(id));
-          AsyncStorage.setItem('Name',JSON.stringify(name));
-          dispatch(createTag(id,name))
-          navigation.navigate('ViewAll')
-        }catch(err){
-          console.log(err);
-          Alert.alert("Error", "" + err.message, [{Text:"ok"}]);
-        }
-    }
 
     const handleSaveTag =() => {
         let newtag = {
@@ -54,7 +38,7 @@ const CreateTagView = ({navigation,}) => {
                     <TextInput placeholder='TagName' style={styles.inputText}
                                 onChangeText = {(val) => setName(val)}/>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={() => addItemToList()}>
+                <TouchableOpacity style={styles.btn} onPress={() => handleSaveTag()}>
                     <Text style={styles.btnText}>Save</Text>
                 </TouchableOpacity>
             </View>

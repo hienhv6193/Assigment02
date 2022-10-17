@@ -12,11 +12,22 @@ export const createTag = (tag) => {
     }
 }
 
+export const updateTag = (tag) => {
+    return {
+        type: UPDATE_TAG,
+        payload: {
+            tagId: tag.id,
+            tagName: tag.name
+        }
+    }
+}
+
 export const deleteTag = (id) => {
     return {
         type: DELETE_TAG,
         payload: {
             tagId: id,
         }
+        
     }
 }

@@ -6,16 +6,15 @@ import {useState} from 'react';
 
 const ViewAlTagsView = ({navigation,}) => {
     const db = useSelector((state) => state.tags)
-
+    console.log(db)
     return(
         <View style={styles.CRUDContainer}>
             <View style={styles.tagAllContainer}>
                 {
-                    db.tags ?
-                        db.tags.map((tag) => {
+                    db ?
+                        db.map((tag) => {
                             return(
-                                <TouchableOpacity key={tag.id} style={styles.tagContainer}
-                                                    onPress={() => navigation.navigate('Edit',{tagId: tag.id,tagName: tag.name})}>
+                                <TouchableOpacity key={tag.id} style={styles.tagContainer}>
                                     <Text style={styles.tagText}>{tag.name}</Text>
                                 </TouchableOpacity>
                             )
@@ -24,7 +23,7 @@ const ViewAlTagsView = ({navigation,}) => {
                     <View><Text>No data</Text></View>
                 }
             </View>
-            <TouchableOpacity style={styles.btn} onPress={() => {navigation.navigate('Create')}}>
+            <TouchableOpacity style={styles.btn} onPress={save => {navigation.navigate('Create')}}>
                 <Text style={styles.btnText}>Create New</Text>
             </TouchableOpacity>
         </View>

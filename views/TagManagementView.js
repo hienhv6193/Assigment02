@@ -4,7 +4,7 @@ import React from 'react';
 import {StyleSheet ,Text, View } from 'react-native';
 import CreateTagView from './CreateTagView';
 import ViewAlTagsView from './ViewAlTagsView';
-
+import EditTagView from './EditTagView'
 const Stack = createNativeStackNavigator();
 
 const TagManagementView = ({params,}) => {
@@ -13,6 +13,7 @@ const TagManagementView = ({params,}) => {
             <Stack.Navigator>
                 <Stack.Screen name='ViewAll' component={ViewAlTagsView}/>
                 <Stack.Screen name='Create' component={CreateTagView}/>
+                <Stack.Screen name='Edit' component={EditTagView}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
