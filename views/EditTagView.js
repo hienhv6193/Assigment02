@@ -5,7 +5,8 @@ import { TextInput } from 'react-native-web';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
-import {updateTag , deleteTag} from '../redux/actions/tagActions';
+import { createTag,updateTag,deleteTag } from '../redux/actions/tagAction';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EditTagView = ({navigation,route}) => {
     const dispatch = useDispatch();

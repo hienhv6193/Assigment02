@@ -1,4 +1,4 @@
-import {CREATE_TAG,DELETE_TAG} from "../actions/tagAction";
+import {CREATE_TAG,UPDATE_TAG,DELETE_TAG} from "../actions/tagAction";
 
 const initialState = {
     tags: [

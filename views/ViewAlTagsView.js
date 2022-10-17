@@ -14,7 +14,8 @@ const ViewAlTagsView = ({navigation,}) => {
                     db ?
                         db.map((tag) => {
                             return(
-                                <TouchableOpacity key={tag.id} style={styles.tagContainer}>
+                                <TouchableOpacity key={tag.id} style={styles.tagContainer}
+                                onPress={() => navigation.navigate('Edit',{tagId: tag.id,tagName: tag.name})}>
                                     <Text style={styles.tagText}>{tag.name}</Text>
                                 </TouchableOpacity>
                             )
