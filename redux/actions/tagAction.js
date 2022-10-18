@@ -8,8 +8,20 @@ export const createTag = (tag) => {
         payload: {
             tagId: tag.id,
             tagName: tag.name,
-            tagPrice:tag.price,
-            tagImg:tag.img
+            tagPrice: tag.price,
+            tagImage: tag.image,
+        }
+    }
+}
+
+export const updateTag = (tag) => {
+    return {
+        type: UPDATE_TAG,
+        payload: {
+            tagId: tag.id,
+            tagName: tag.name,
+            tagPrice: tag.price,
+            tagImage: tag.image,
         }
     }
 }
@@ -20,5 +32,6 @@ export const deleteTag = (id) => {
         payload: {
             tagId: id,
         }
+        
     }
 }

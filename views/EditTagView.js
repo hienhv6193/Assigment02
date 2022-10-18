@@ -1,33 +1,38 @@
 import React from 'react';
-import {Alert, ImageBackground, StyleSheet ,Text, TouchableOpacity, View } from 'react-native';
+import {ImageBackground, StyleSheet ,Text, TouchableOpacity, View } from 'react-native';
 import IonIcons from 'react-native-vector-icons/IonIcons';
 import { TextInput } from 'react-native-web';
-// step 1
+
 import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
-import { createTag } from '../redux/actions/tagAction';
+import { createTag,updateTag,deleteTag } from '../redux/actions/tagAction';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const CreateTagView = ({navigation,}) => {
-    // step 2
+const EditTagView = ({navigation,route}) => {
     const dispatch = useDispatch();
     const db = useSelector((state) => state.tags);
+    const {tagId} = route.params;
+    const {tagName}=route.params;
 
-    const [id,setId] = useState(0);
+    const [id,setId] = useState(tagId);
     const [name,setName] = useState('');
     const [price,setPrice] = useState('');
     const [image,setImage] = useState('');
 
-    const handleSaveTag =() => {
-        let newtag = {
+    const handleUpdateTag =() => {
+        let uptag = {
             id: id,
             name: name,
             price: price,
             image: image,
         }
-        console.log(newtag);
-        //step 3
-        dispatch(createTag(newtag))
+        console.log(uptag);
+        dispatch(updateTag(uptag))
+        navigation.navigate('ViewAll')
+    }
+    const handleDeleteTag =(id) => {
+        console.log(tagId);
+        dispatch(deleteTag(id))
         navigation.navigate('ViewAll')
     }
 
@@ -42,24 +47,27 @@ const CreateTagView = ({navigation,}) => {
                     <IonIcons name='create' color='#FFF' size={36}/>
                 </View>
                 <Text style={styles.signinText}>    
-                    Thêm món ăn
+                    Sửa món ăn
                 </Text>
                 <View style={styles.formContainer}>
                     <View style={styles.inputContainer}>
-                        <TextInput  placeholder='ID sản phẩm' style={styles.inputText} onChangeText={(val)=>setId(val)}/>
+                        <TextInput value={id} style={styles.inputText} onChangeText={(val)=>setId(val)}/>
                     </View>
                     {/* check val */}
                     <View style={styles.inputContainer}>
-                        <TextInput  placeholder='Tên sản phẩm' style={styles.inputText} onChangeText={(val)=>setName(val)}/>
+                        <TextInput value={name} style={styles.inputText} onChangeText={(val)=>setName(val)}/>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput  placeholder='Giá tiền' style={styles.inputText} onChangeText={(val)=>setPrice(val)}/>
+                        <TextInput  value={price} style={styles.inputText} onChangeText={(val)=>setPrice(val)}/>
                     </View>
                     <View style={styles.inputContainer}>
-                        <TextInput  placeholder='Hình ảnh' style={styles.inputText} onChangeText={(val)=>setImage(val)}/>
+                        <TextInput  value={image} style={styles.inputText} onChangeText={(val)=>setImage(val)}/>
                     </View>
-                    <TouchableOpacity style={styles.btn} onPress={() => handleSaveTag()}>
+                    <TouchableOpacity style={styles.btn} onPress={() => handleUpdateTag()}>
                         <Text style={styles.btnTxt} >Lưu</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={() => handleDeleteTag(tagId)}>
+                        <Text style={styles.btnTxt} >Xóa</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
@@ -67,7 +75,7 @@ const CreateTagView = ({navigation,}) => {
     );
 }
 
-export default CreateTagView;
+export default EditTagView;
 
 const styles = StyleSheet.create({
     loginContainer: {

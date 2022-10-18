@@ -1,34 +1,41 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View ,Image,ImageBackground} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View ,Image,ImageBackground } from 'react-native';
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 // step 1
 import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
+import { TextInput } from 'react-native-web';
 
 const ViewAlTagsView = ({navigation,}) => {
-    const db = useSelector((state) => state.tags)
-
+    const db = useSelector((state) => state.tags);
+    console.log(db)
     return(
         <ImageBackground source={{uri:'https://img.lovepik.com/photo/50090/3235.jpg_wh860.jpg'}}  
         resizeMode='cover' 
-        style={styles.bgContainer}>
+        style={styles.bgContainer}
+    >
+        
         <View style={styles.CRUDContainer}>
             <View>
                 <Text style={styles.tiltle}> MENU</Text>
             </View>
+            <View style={{width:'100%', flexDirection:'row',marginLeft:100}}>
+                <TextInput style={{width:'70%',height:30,borderRadius:50,alignSelf:'center',justifyContent:'center',marginTop: 10,marginBottom:20,backgroundColor:'#fff'}}></TextInput>
+                <Ionicons style={{marginTop:15}}
+                 name='search'
+                 color='#fff'
+                 size={24}
+        />
+            </View>
             <View style={styles.tagAllContainer}>
             {
-                    db.tags ?
-                        db.tags.map((x) => {
+                    db ?
+                        db.map((x) => {
                             return(
                                 <TouchableOpacity key={x.id} style={styles.tagCT}>
                                     
                                             <Text style={styles.tagss}>{x.name}</Text>
-                                            
-                                        
-                                    
-                                
                                     
                                 </TouchableOpacity>
                             )
@@ -39,18 +46,18 @@ const ViewAlTagsView = ({navigation,}) => {
             </View>
             <View style={styles.ProductAllContainer}>
                 {
-                    db.products ?
-                        db.products.map((tag) => {
+                    db ?
+                        db.map((tag) => {
                             return(
                                 <TouchableOpacity key={tag.id} style={styles.tagContainer}
-                                                    onPress={() => navigation.navigate('Edit',{tagId: tag.id,tagName: tag.name})}>
+                                                    onPress={() => navigation.navigate('Edit',{tagId: tag.id,tagName: tag.name,tagPrice:tag.price,tagImage: tag.image})}>
                                     <View style={styles.contentMain}>
                                         <View style={styles.TxtView}>
                                             <Text style={styles.tagText}>{tag.name}</Text>
                                             <Text style={styles.tagPText}>Price:{tag.price}</Text>
                                         </View>
                                         
-                                    <Image source={{uri:tag.img}} style={styles.img} />
+                                    <Image source={{uri:tag.image}} style={styles.img} />
                                     </View>
                                     
                                 </TouchableOpacity>
@@ -87,7 +94,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
     },
     TxtView:{
-        marginRight:70
+        marginRight:40
     },
     ProductAllContainer: {
         width:'100%',
@@ -106,19 +113,21 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     tagCT:{
-        width:60,
-        height:60,
+        width:'auto',
+        height:50,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 10,
         margin: 10,
-        borderRadius: 30,
+        borderRadius: 25,
         borderWidth: 1,
         borderColor: '#fff',
+        backgroundColor:'#fff'
     },
     tagText: {
         color: '#d81b60',
-        fontSize:25
+        fontSize:25,
+        width:120
     },
     tagPText:{
         color:'#fff'
@@ -147,8 +156,8 @@ const styles = StyleSheet.create({
         color:'red'
     },
     tagss:{
-        fontSize:15,
-        color: '#fff',
+        fontSize:10,
+        color: '#000',
     },
     tagAllContainer:{
         flexDirection:'row',
