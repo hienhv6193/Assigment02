@@ -16,11 +16,15 @@ const EditTagView = ({navigation,route}) => {
 
     const [id,setId] = useState(tagId);
     const [name,setName] = useState('');
+    const [price,setPrice] = useState('');
+    const [image,setImage] = useState('');
 
     const handleUpdateTag =() => {
         let uptag = {
             id: id,
-            name: name
+            name: name,
+            price: price,
+            image: image,
         }
         console.log(uptag);
         dispatch(updateTag(uptag))
@@ -33,26 +37,40 @@ const EditTagView = ({navigation,route}) => {
     }
 
     return(
-        <View style={styles.CRUDContainer}>
-            <View style={styles.formContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput
-                    style={styles.inputText}
-                     value={tagId}/>
+        <View style={styles.loginContainer}>
+            <ImageBackground    source={{uri:'https://i.pinimg.com/originals/2e/e9/18/2ee918427712255bc116749e33616d33.png'}}  
+        resizeMode='cover'
+                
+                style={styles.bgContainer}
+            >
+                <View style={styles.logoLogin}>
+                    <IonIcons name='create' color='#FFF' size={36}/>
                 </View>
-                <View style={styles.inputContainer}>
-                    <TextInput value={name}
-                        onChangeText={(value) => {setName(value)}}
-                        style={styles.inputText}
-                    ></TextInput>
+                <Text style={styles.signinText}>    
+                    Sửa món ăn
+                </Text>
+                <View style={styles.formContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput value={id} style={styles.inputText} onChangeText={(val)=>setId(val)}/>
+                    </View>
+                    {/* check val */}
+                    <View style={styles.inputContainer}>
+                        <TextInput value={name} style={styles.inputText} onChangeText={(val)=>setName(val)}/>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput  value={price} style={styles.inputText} onChangeText={(val)=>setPrice(val)}/>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput  value={image} style={styles.inputText} onChangeText={(val)=>setImage(val)}/>
+                    </View>
+                    <TouchableOpacity style={styles.btn} onPress={() => handleUpdateTag()}>
+                        <Text style={styles.btnTxt} >Lưu</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.btn} onPress={() => handleDeleteTag(tagId)}>
+                        <Text style={styles.btnTxt} >Xóa</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={() => handleUpdateTag()}>
-                    <Text style={styles.btnText}>Update</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.btn} onPress={() => handleDeleteTag(tagId)}>
-                    <Text style={styles.btnText}>Delete</Text>
-                </TouchableOpacity>
-            </View>
+            </ImageBackground>
         </View>
     );
 }
@@ -60,33 +78,59 @@ const EditTagView = ({navigation,route}) => {
 export default EditTagView;
 
 const styles = StyleSheet.create({
-    CRUDContainer: {
+    loginContainer: {
         flex: 1,
     },
-    formContainer: {
-        // backgroundColor: 'black'
-        width: '100%',
+    logoLogin: {
+        width: 60,
+        height: 60,
+        borderRadius: 60/2,
+        backgroundColor: '#d81b60',
         alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 40,
+    }, 
+    signinText: {
+        color: '#d81b60',
+        fontSize: 30,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        marginTop: 10,
+        color: '#FFF',
+
+    },
+    formContainer: {
+        width: '80%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 50,
     },
     inputContainer: {
-        width: '70%'
+        width: '70%',
+        marginBottom: 10,
     },
     inputText: {
         borderBottomWidth: 2,
         borderBottomColor: '#d81b60',
-        paddingVertical: 5,
-        marginBottom: 10,
+        paddingVertical:10,
+        color: '#FFF',
+        paddingLeft: 15,
     },
     btn: {
         backgroundColor: '#d81b60',
         width: '70%',
         height: 45,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 45/2,
-        marginBottom: 10,
+        justifyContent:'center',
+        borderRadius: 10,
+        marginTop: 50,
     },
-    btnText: {
-        color: '#fff'
+    btnTxt: {
+        color: '#FFF'
+    },
+    bgContainer: {
+        flex: 1,
+        alignItems: 'center',
+
     },
 });

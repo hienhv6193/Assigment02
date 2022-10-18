@@ -7,7 +7,9 @@ export const createTag = (tag) => {
         type: CREATE_TAG,
         payload: {
             tagId: tag.id,
-            tagName: tag.name
+            tagName: tag.name,
+            tagPrice: tag.price,
+            tagImage: tag.image,
         }
     }
 }
@@ -17,7 +19,9 @@ export const updateTag = (tag) => {
         type: UPDATE_TAG,
         payload: {
             tagId: tag.id,
-            tagName: tag.name
+            tagName: tag.name,
+            tagPrice: tag.price,
+            tagImage: tag.image,
         }
     }
 }

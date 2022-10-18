@@ -15,11 +15,15 @@ const CreateTagView = ({navigation,}) => {
 
     const [id,setId] = useState(0);
     const [name,setName] = useState('');
+    const [price,setPrice] = useState('');
+    const [image,setImage] = useState('');
 
     const handleSaveTag =() => {
         let newtag = {
             id: id,
-            name: name
+            name: name,
+            price: price,
+            image: image,
         }
         console.log(newtag);
         //step 3
@@ -28,20 +32,37 @@ const CreateTagView = ({navigation,}) => {
     }
 
     return(
-        <View style={styles.CRUDContainer}>
-            <View style={styles.formContainer}>
-                <View style={styles.inputContainer}>
-                    <TextInput placeholder='TagId' style={styles.inputText} 
-                                onChangeText = {(val) => setId(val)}/>
+        <View style={styles.loginContainer}>
+            <ImageBackground    source={{uri:'https://i.pinimg.com/originals/2e/e9/18/2ee918427712255bc116749e33616d33.png'}}  
+        resizeMode='cover'
+                
+                style={styles.bgContainer}
+            >
+                <View style={styles.logoLogin}>
+                    <IonIcons name='create' color='#FFF' size={36}/>
                 </View>
-                <View style={styles.inputContainer}>
-                    <TextInput placeholder='TagName' style={styles.inputText}
-                                onChangeText = {(val) => setName(val)}/>
+                <Text style={styles.signinText}>    
+                    Thêm món ăn
+                </Text>
+                <View style={styles.formContainer}>
+                    <View style={styles.inputContainer}>
+                        <TextInput  placeholder='ID sản phẩm' style={styles.inputText} onChangeText={(val)=>setId(val)}/>
+                    </View>
+                    {/* check val */}
+                    <View style={styles.inputContainer}>
+                        <TextInput  placeholder='Tên sản phẩm' style={styles.inputText} onChangeText={(val)=>setName(val)}/>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput  placeholder='Giá tiền' style={styles.inputText} onChangeText={(val)=>setPrice(val)}/>
+                    </View>
+                    <View style={styles.inputContainer}>
+                        <TextInput  placeholder='Hình ảnh' style={styles.inputText} onChangeText={(val)=>setImage(val)}/>
+                    </View>
+                    <TouchableOpacity style={styles.btn} onPress={() => handleSaveTag()}>
+                        <Text style={styles.btnTxt} >Lưu</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={styles.btn} onPress={() => handleSaveTag()}>
-                    <Text style={styles.btnText}>Save</Text>
-                </TouchableOpacity>
-            </View>
+            </ImageBackground>
         </View>
     );
 }
@@ -49,77 +70,59 @@ const CreateTagView = ({navigation,}) => {
 export default CreateTagView;
 
 const styles = StyleSheet.create({
-    CRUDContainer: {
+    loginContainer: {
         flex: 1,
     },
-    formContainer: {
-        // backgroundColor: 'black'
-        width: '100%',
+    logoLogin: {
+        width: 60,
+        height: 60,
+        borderRadius: 60/2,
+        backgroundColor: '#d81b60',
         alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 40,
+    }, 
+    signinText: {
+        color: '#d81b60',
+        fontSize: 30,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        marginTop: 10,
+        color: '#FFF',
+
+    },
+    formContainer: {
+        width: '80%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingTop: 50,
     },
     inputContainer: {
-        width: '70%'
+        width: '70%',
+        marginBottom: 10,
     },
     inputText: {
         borderBottomWidth: 2,
         borderBottomColor: '#d81b60',
-        paddingVertical: 5,
-        marginBottom: 10,
-        fontSize: 17
+        paddingVertical:10,
+        color: '#FFF',
+        paddingLeft: 15,
     },
     btn: {
         backgroundColor: '#d81b60',
         width: '70%',
         height: 45,
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 45/2,
+        justifyContent:'center',
+        borderRadius: 10,
+        marginTop: 50,
     },
-    btnText: {
-        color: '#fff'
+    btnTxt: {
+        color: '#FFF'
     },
-    listItemContainer: {
+    bgContainer: {
         flex: 1,
-    },
-    headerComponentTitle: {
-        color: 'black',
-        fontSize: 30,
-    },
-    headerListComponent: {
-        textAlign: 'center',
-        marginTop: 10,
-        marginBottom: 20
-    },
-    itemContainer: {
-        flexDirection: 'row',
-        marginTop: 10,
-        marginLeft: 15,
-    },
-    imgItem: {
-        width: 100,
-        height: 100
-    },
-    itemInfo: {},
-    itemDetails: {
-        marginLeft: 15,
-        marginBottom: 30,
-        width: '65%'
-    },
-    nameText: {
-        color: '#000',
-        fontSize: 22,
-        flexWrap: 'wrap'
-    },
-    descriptionText: {
-        color: '#bdbdbd',
-        fontSize: 22
-    },
-    ratingText: {
-        color: '#000',
-        fontSize: 22
-    },
-    priceText: {
-        color: '#000',
-        fontSize: 22
+        alignItems: 'center',
+
     },
 });

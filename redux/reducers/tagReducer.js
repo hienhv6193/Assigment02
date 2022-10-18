@@ -14,7 +14,7 @@ const initialState = {
 export const tagReducer = (state=initialState, action) => {
     switch(action.type){
         case CREATE_TAG:
-            let newtag = {id: Number(action.payload.tagId), name: action.payload.tagName}
+            let newtag = {id: Number(action.payload.tagId), name: action.payload.tagName, price: action.payload.tagPrice, image: action.payload.tagImage}
             console.log(newtag)
 
             return{
@@ -28,7 +28,9 @@ export const tagReducer = (state=initialState, action) => {
                 tags: state.tags.map((x) => {
                     if (x.id === action.payload.tagId) {
                         return {...x,
-                            name: action.payload.tagName
+                            name: action.payload.tagName,
+                            price: action.payload.tagPrice,
+                            image: action.payload.tagImage
                         }
                     }
                     return x;
