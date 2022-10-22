@@ -5,7 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 // step 1
 import {useDispatch, useSelector} from 'react-redux';
 import {useState} from 'react';
-import { TextInput } from 'react-native-web';
+import { TextInput } from 'react-native';
 
 const ViewAlTagsView = ({navigation,}) => {
     const db = useSelector((state) => state.tags);
@@ -41,7 +41,7 @@ const ViewAlTagsView = ({navigation,}) => {
                             )
                     })
                     :
-                    <View><Text>No data</Text></View>
+                    <View><Text></Text></View>
                 }
             </View>
             <View style={styles.ProductAllContainer}>
