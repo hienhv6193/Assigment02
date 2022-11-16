@@ -2,13 +2,14 @@ import {CREATE_TAG,UPDATE_TAG,DELETE_TAG} from "../actions/tagAction";
 
 const initialState = {
     tags: [
-        // {id: 1, name: 'C#'},
-        // {id: 2, name: 'PHP'},
-        // {id: 3, name: 'HTML'},
-        // {id: 4, name: 'CSS'},
-        // {id: 5, name: 'JS'},
+        {id: 1, name: 'For You'},
+        {id: 2, name: 'Following'},
+        {id: 3, name: 'Action'},
+      
+       
     ],
-    currentTag: {}
+    currentTag: {},
+    
 }
 
 export const tagReducer = (state=initialState, action) => {
